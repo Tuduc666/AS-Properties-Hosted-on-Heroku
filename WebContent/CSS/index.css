@@ -1,0 +1,24 @@
+html{
+    height: 99%;
+}
+body{
+    background-color: #00330020; 
+    height: 99%;
+    /*background-image: url('../IMAGES/P000001.jpg');  -- background image is set in the div to fade out the image */
+}
+iframe{
+    width: 99%;
+    height: 80%;
+    position: absolute;
+    top: 19%;
+}
+
+h1 { 
+    text-align: center;
+    letter-spacing:5px;       /* stretches out the h1 */
+    margin: 0;
+    /*text-shadow: 3px 3px 5px red;        /* add a shadow to the text in the header  */
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    font-size: 7rem;
+}
