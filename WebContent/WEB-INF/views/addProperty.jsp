@@ -13,6 +13,7 @@
 		<title>Add Property</title>
 	</head>
 <%
+
 %>                                                   
 <body>   <!-- NOTE: names below must match names in model class, not names in SQL table -->
 	<h1>ASP Add Property</h1>

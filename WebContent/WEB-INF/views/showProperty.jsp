@@ -10,35 +10,32 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="<spring:url value="/CSS/updateUser.css" />">
-		<title>Add Salesperson</title>
+		<title>Property Detail</title>
 	</head>
 <%
-
+	Integer p_id = (Integer) request.getAttribute("propertyid");   
+	User u = (User) session.getAttribute("userkey");
+	String user_email = "";
+	if (u != null) user_email = u.getEmail();
 %>                                                   
 <body>   <!-- NOTE: names below must match names in model class, not names in SQL table -->
-	<h1>ASP Add Salesperson</h1>
+	<h1>ASP Showing Request</h1>
 	<div class="container">
-		<form action="addSalesSQL" method="post">	
-		
-			<div class="sub_field">
-				<label>Full Name</label>
-				<input type="text" id="name" name="name"  />
-			</div>
-			<div class="sub_field">
-				<label>Phone</label>
-				<input type="text" id="phone" name="phone"  />
-			</div>
+		<form action="showingSQL" method="post">	
 			<div class="sub_field">
 				<label>Email</label>
-				<input type="email" id="email" name="email"  />
+				<input type="email" id="email" name="email" value="<%=user_email%>" required />
 			</div>
 			<div class="sub_field">
-				<label>Commission Percentage</label>
-				<input type="number" step="0.01" id="comm" name="comm"  />  
+				<label>PropertyId (non-input)</label>
+				<input type="number" id="property_id" name="property_id" value="<%=p_id%>"  readonly />
 			</div>
-			
+				<div class="sub_field">
+				<label>Message</label>
+				<input style="width:80%;" type="text" id="user_message" name="user_message"  />
+			</div>
 			<div class="btn">
-				<input type="submit" name="submit"  value="Add" />
+				<input type="submit" name="submit"  value="Submit" />
 			</div>
 		</form>
 	</div>

@@ -47,15 +47,23 @@ public class OracleQueries {
 			+ "where property_id = ?";
 	
 	public final static String GETSHOWING = "select * from p_requestshowing " 
-			+ "where user_id = ? and property_id = ?";
+			+ "where email = ? and property_id = ?";
 	public final static String ADDSHOWING = "insert into p_requestshowing "
-			+ "(user_id,property_id,user_message) "
-			+ "values(?,?,?)";
+			+ "(email,property_id,user_message, status) "
+			+ "values(?,?,?,'Active')";
 	public final static String UPDATESHOWING = "update p_requestshowing "
-			+ "set user_id = ?, property_id = ?, user_message = ? "
-			+ "where user_id = ? and property_id = ?";
+			+ "set user_message = ?, status = ? "
+			+ "where email = ? and property_id = ?";
 	public final static String DELETESHOWING = "delete from p_requestshowing "
-			+ "where user_id = ? and property_id = ?";
+			+ "where show_id = ?";
+	
+	public final static String GETSHOWINGDETAILLIST = "select s.user_id, u.user_name, "
+			+ "u.email, u.phone, s.user_message, s.property_id, p.address1, p.city_name, "
+			+ "p.state_code, p.zipcode, p.photo_filename from p_requestshowing s "
+			+ "join p_user u on s.user_id = u.user_id "  
+			+ "join p_property p on s.property_id = p.property_id "  
+			+ "where s.status = 'Active' "
+			+ "order by s.show_id";
 	
 	public final static String GETSALESPERSONBYID = "select * from p_salesperson " 
 			+ "where salesperson_id = ?";

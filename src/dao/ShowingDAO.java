@@ -11,7 +11,7 @@ import utils.OracleQueries;
 
 public class ShowingDAO {
 
-	public Showing getShowing(Integer  user_id, Integer  property_id) throws IOException, SQLException {
+	public Showing getShowing(String email, Integer property_id) throws IOException, SQLException {
 		Showing showing = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -19,14 +19,16 @@ public class ShowingDAO {
 
 		conn = GetConnection.Connect();
 		stmt = conn.prepareStatement(OracleQueries.GETSHOWING);
-		stmt.setInt(1, user_id);
+		stmt.setString(1, email);
 		stmt.setInt(2, property_id);
 		result = stmt.executeQuery();
 		if (result.next()) {
 			showing = new Showing();
-			showing.setUser_id(result.getInt(1));
-			showing.setProperty_id(result.getInt(2));
-			showing.setUser_message(result.getString(3));
+			showing.setShow_id(result.getInt(1));
+			showing.setEmail(result.getString(2));
+			showing.setProperty_id(result.getInt(3));
+			showing.setUser_message(result.getString(4));
+			showing.setStatus(result.getString(5));
 		}
 
 		if (result != null) {
@@ -42,15 +44,14 @@ public class ShowingDAO {
 		return showing;
 	}
 
-	public Boolean addShowing(Integer  user_id, Integer  property_id, String user_message)
-			throws IOException, SQLException {
+	public Boolean addShowing(String email, Integer property_id, String user_message) throws IOException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		Integer result = null;
 
 		conn = GetConnection.Connect();
 		stmt = conn.prepareStatement(OracleQueries.ADDSHOWING);
-		stmt.setInt(1, user_id);
+		stmt.setString(1, email);
 		stmt.setInt(2, property_id);
 		stmt.setString(3, user_message);
 		result = stmt.executeUpdate();
@@ -65,7 +66,8 @@ public class ShowingDAO {
 		return result > 0;
 	}
 
-	public Boolean updateShowing(Integer  user_id, Integer  property_id, String user_message)
+	// use for updating user message and status
+	public Boolean updateShowing(String email, Integer property_id, String user_message, String status)
 			throws IOException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -73,11 +75,10 @@ public class ShowingDAO {
 
 		conn = GetConnection.Connect();
 		stmt = conn.prepareStatement(OracleQueries.UPDATESHOWING);
-		stmt.setInt(1, user_id);
-		stmt.setInt(2, property_id);
-		stmt.setString(3, user_message);
-		stmt.setInt(4, user_id);
-		stmt.setInt(5, property_id);
+		stmt.setString(1, user_message);
+		stmt.setString(2, status);
+		stmt.setString(3, email);
+		stmt.setInt(4, property_id);
 		result = stmt.executeUpdate();
 
 		if (stmt != null) {
@@ -90,15 +91,15 @@ public class ShowingDAO {
 		return result > 0;
 	}
 
-	public boolean deleteShowing(Integer user_id, Integer property_id) throws IOException, SQLException {
+	// used for unit testing only
+	public boolean deleteShowing(Integer show_id) throws IOException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		Integer result = null;
 
 		conn = GetConnection.Connect();
 		stmt = conn.prepareStatement(OracleQueries.DELETESHOWING);
-		stmt.setInt(1, user_id);
-		stmt.setInt(2, property_id);
+		stmt.setInt(1, show_id);
 		result = stmt.executeUpdate();
 
 		if (stmt != null) {

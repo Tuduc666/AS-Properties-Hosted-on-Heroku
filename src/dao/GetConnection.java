@@ -7,13 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class GetConnection {
-// Heroku connection
-//	public static Connection getConnection() throws ClassNotFoundException, IOException, SQLException {
-//		String dbUrl = System.getenv("JDBC_DATABASE_URL");
-//		return DriverManager.getConnection(dbUrl);
-//	}
 	
-// Postgres JDBC local connection - worked!!!!!
+ // Postgres JDBC local connection - worked!!!!!
 //    private final static String url = "jdbc:postgresql://localhost/dvdrental";
 //    private final static String user = "postgres";
 //    private final static String password = "Tamduc1166";
@@ -21,7 +16,7 @@ public class GetConnection {
 //    public static Connection Connect() {
 //        Connection conn = null;
 //        try {
-        	// this next line is needed for TomCat to work!!!!!!!
+////        	 this next line is needed for TomCat to work!!!!!!!
 //        	Class.forName("org.postgresql.Driver");            
 //            conn = DriverManager.getConnection(url, user, password);
 //            System.out.println("Connected to the PostgreSQL server successfully.");
@@ -32,11 +27,8 @@ public class GetConnection {
 //        return conn;
 //    }
     
- // Postgres JDBC local connection - worked!!!!!
-//    private final static String url = "jdbc:postgresql://localhost/dvdrental";
-//    private final static String user = "postgres";
-//    private final static String password = "Tamduc1166";
-    
+	
+ // Postgres JDBC Hosted on Heroku - worked!!!!!   
     public static Connection Connect() {
         Connection conn = null;
         try {
@@ -56,4 +48,12 @@ public class GetConnection {
  
         return conn;
     }
+    
+    
+ // Heroku java connection - never tested this!!!!
+// 	public static Connection getConnection() throws ClassNotFoundException, IOException, SQLException {
+// 		String dbUrl = System.getenv("JDBC_DATABASE_URL");
+// 		return DriverManager.getConnection(dbUrl);
+// 	}
+    
 }
